@@ -16,10 +16,16 @@ A simple guide on setting up Debian 13 (Trixie) KDE installation. Covers removin
 
 The debloat script removes a set of packages that ship with Debian 13 KDE by default but are rarely needed, things like Konqueror, Akregator, JuK, Dragon Player, various input method frameworks, and regional fonts. It also runs `autoremove` to pull out orphaned dependencies and cleans up any leftover configuration files from previously removed packages.
 
-**Run it as root:**
+Download the debian-13-debloat.sh file and make it executable:
 
 ```bash
-sudo bash debian-13-debloat.sh
+chmod +x /path/to/script/debian-13-debloat.sh
+```
+
+Then run the script(you have to be in the direcotry that the script is located in):
+
+```bash
+sudo ./debian-13-debloat.sh
 ```
 
 The script will:
@@ -62,22 +68,7 @@ sudo apt update
 sudo apt install nvidia-kernel-dkms nvidia-driver nvidia-driver-libs:i386
 ```
 
-After the installation finishes, **wait around 5 minutes** before rebooting to let DKMS finish building the kernel module.
-
-```bash
-sudo reboot
-```
-
-**Notes:**
-
-- If prompted about a conflict with the free `nouveau` module, press Enter to accept and continue.
-- If Plasma Wayland does not work after reboot, apply the following fix:
-
-```bash
-sudo nano /etc/modprobe.d/nvidia-options.conf
-```
-
-Add these lines to the file:
+After the installation finishes add these lines to the /etc/modprobe.d/nvidia-options.conf file:
 
 ```
 options nvidia_drm modeset=1
@@ -92,16 +83,14 @@ sudo update-initramfs -u
 sudo systemctl reboot
 ```
 
----
-
 ## Firefox (Mozilla Repository)
 
 Debian ships `firefox-esr` by default. This section replaces it with the standard Firefox release build from Mozilla's own APT repository.
 
-**1. Remove the ESR package:**
+**1. Remove the ESR package and install wget:**
 
 ```bash
-sudo apt purge firefox-esr
+sudo apt purge firefox-esr && sudo apt install wget
 ```
 
 **2. Import the Mozilla repository signing key:**
