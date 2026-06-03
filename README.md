@@ -1,4 +1,4 @@
-# Debian 13 KDE — Post-Install Guide
+# Debian 13 KDE Post-Install Guide
 
 A simple guide on setting up Debian 13 (Trixie) KDE installation. Covers removing unnecessary default packages, installing NVIDIA proprietary drivers, and replacing Firefox ESR with the official Mozilla build.
 
@@ -14,7 +14,7 @@ A simple guide on setting up Debian 13 (Trixie) KDE installation. Covers removin
 
 ## Debloat
 
-The debloat script removes a set of packages that ship with Debian 13 KDE by default but are rarely needed — things like Konqueror, Akregator, JuK, Dragon Player, various input method frameworks, and regional fonts. It also runs `autoremove` to pull out orphaned dependencies and cleans up any leftover configuration files from previously removed packages.
+The debloat script removes a set of packages that ship with Debian 13 KDE by default but are rarely needed, things like Konqueror, Akregator, JuK, Dragon Player, various input method frameworks, and regional fonts. It also runs `autoremove` to pull out orphaned dependencies and cleans up any leftover configuration files from previously removed packages.
 
 **Run it as root:**
 
@@ -56,6 +56,7 @@ Then run the following commands in order:
 
 ```bash
 sudo apt update
+sudo apt install linux-headers-generic
 sudo dpkg --add-architecture i386
 sudo apt update
 sudo apt install nvidia-kernel-dkms nvidia-driver nvidia-driver-libs:i386
